@@ -21,7 +21,7 @@ class TD3_Agent(object):
         self.C1_target = copy.deepcopy(self.Critic1)
         self.C2_target = copy.deepcopy(self.Critic2)
 
-        self.a_std = self.noise_decay * self.a_range[-1]
+        self.a_std = self.exp_noise * self.a_range[-1]
 
         self.policy_noise = 0.2 * self.a_range[-1]
         self.noise_clip = 0.5 * self.a_range[-1]

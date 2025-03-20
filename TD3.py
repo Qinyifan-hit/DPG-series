@@ -80,9 +80,9 @@ class TD3_Agent(object):
                 p_target.data.copy_(self.tua * p.data + (1 - self.tua) * p_target.data)
 
     def load(self, Env_name, Index):
-        self.Actor.state_dict(torch.load("./model/{}_Actor{}.pth".format(Env_name, Index)), map_location=device)
-        self.Critic1.state_dict(torch.load("./model/{}_Critic1{}.pth".format(Env_name, Index)), map_location=device)
-        self.Critic2.state_dict(torch.load("./model/{}_Critic2{}.pth".format(Env_name, Index)), map_location=device)
+        self.Actor.load_state_dict(torch.load("./model/{}_Actor{}.pth".format(Env_name, Index)), map_location=device)
+        self.Critic1.load_state_dict(torch.load("./model/{}_Critic1{}.pth".format(Env_name, Index)), map_location=device)
+        self.Critic2.load_state_dict(torch.load("./model/{}_Critic2{}.pth".format(Env_name, Index)), map_location=device)
         self.C1_target = copy.deepcopy(self.Critic1)
         self.C2_target = copy.deepcopy(self.Critic2)
 

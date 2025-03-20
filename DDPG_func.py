@@ -32,8 +32,8 @@ class DDPG_Agent(object):
     def train(self, Replay):
         s, a, r, s_, done = Replay.sample(self.batch_size)
         with torch.no_grad():
-            a_ = self.Actor(s_)
-            Q_target = r + self.gamma * self.Critic(s_, a_) * (~done)
+            a_ = self.A_target(s_)
+            Q_target = r + self.gamma * self.C_target(s_, a_) * (~done)
 
         Q = self.Critic(s, a)
         C_loss = Func.mse_loss(Q_target, Q)

@@ -46,8 +46,8 @@ class TD3_Agent(object):
             a_next = self.A_target(s_)
             noise_a = torch.clip(torch.randn_like(a) * self.policy_noise, -self.noise_clip, self.noise_clip)
             a_next_n = torch.clip(noise_a + a_next, self.a_range[0], self.a_range[-1])
-            Q1_ = self.Critic1(s_, a_next_n)
-            Q2_ = self.Critic2(s_, a_next_n)
+            Q1_ = self.C1_target(s_, a_next_n)
+            Q2_ = self.C2_target(s_, a_next_n)
             Q_ = torch.min(Q1_, Q2_)
             Q_target = r + (~done) * self.gamma * Q_
 

@@ -43,7 +43,7 @@ class TD3_Agent(object):
         self.delay_counter += 1
         s, a, r, s_, done = Replay.sample(self.batch_size)
         with torch.no_grad():
-            a_next = self.Actor(s_)
+            a_next = self.A_target(s_)
             noise_a = torch.clip(torch.randn_like(a) * self.policy_noise, -self.noise_clip, self.noise_clip)
             a_next_n = torch.clip(noise_a + a_next, self.a_range[0], self.a_range[-1])
             Q1_ = self.Critic1(s_, a_next_n)
